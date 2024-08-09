@@ -8,17 +8,18 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 import com.example.whatsappui.R
 
-val InterSans = FontFamily(
-    Font(R.font.inter_light, FontWeight.Light),
-    Font(R.font.inter_regular, FontWeight.Normal),
-    Font(R.font.inter_medium, FontWeight.Medium),
-    Font(R.font.inter_semibold, FontWeight.SemiBold)
+val RobotoSans = FontFamily(
+    Font(R.font.roboto_thin, FontWeight.Thin),
+    Font(R.font.roboto_light, FontWeight.Light),
+    Font(R.font.roboto_regular, FontWeight.Normal),
+    Font(R.font.roboto_medium, FontWeight.Medium),
+    Font(R.font.roboto_bold, FontWeight.Bold)
 )
 
 // Set of Material typography styles to start with
 val Typography = Typography(
     bodyLarge = TextStyle(
-        fontFamily = InterSans,
+        fontFamily = RobotoSans,
         fontWeight = FontWeight.Normal,
         fontSize = 16.sp,
         lineHeight = 24.sp,

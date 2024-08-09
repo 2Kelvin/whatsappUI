@@ -96,7 +96,7 @@ fun SingleChat(
                 horizontalArrangement = Arrangement.SpaceBetween,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(bottom = 24.dp, start = 8.dp, end = 8.dp)
+                    .padding(bottom = 20.dp, start = 8.dp, end = 8.dp)
             ) { // message peek & message count
                 Text( // message peek
                     text = message,

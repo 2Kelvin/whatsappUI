@@ -8,9 +8,11 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.outlined.MoreVert
 import androidx.compose.material.icons.outlined.Search
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -35,13 +37,21 @@ import com.example.whatsappui.ui.theme.WhatsappUITheme
 @Composable
 fun ChatsScreen(modifier: Modifier = Modifier) {
     Scaffold(
-        topBar = { WhatsappTopAppBar() }
+        topBar = { WhatsappTopAppBar() },
+        floatingActionButton = {
+            FloatingActionButton(onClick = {}) {
+                Icon(
+                    imageVector = Icons.Filled.Add,
+                    contentDescription = "Add"
+                )
+            }
+        }
     ) { innerPadding ->
         LazyColumn(
             modifier = modifier.padding(innerPadding),
             verticalArrangement = Arrangement.spacedBy(4.dp)
         ) {
-            items(8) {
+            items(10) {
                 SingleChat(
                     imageID = R.drawable.pic0,
                     name = "Bellamy Okogie",
