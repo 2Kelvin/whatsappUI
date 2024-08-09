@@ -10,7 +10,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -18,6 +17,7 @@ import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -39,7 +39,7 @@ import com.example.whatsappui.ui.theme.WhatsappUITheme
  * with a profile image, name and message, message peek & message count
  */
 @Composable
-fun ChatPerson(
+fun SingleChat(
     imageID: Int,
     name: String,
     time: String,
@@ -47,14 +47,19 @@ fun ChatPerson(
     messageCount: Int,
     modifier: Modifier = Modifier
 ) {
-    Row(modifier = modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
+    Row(
+        modifier = modifier.fillMaxWidth(),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Spacer(modifier = Modifier.width(12.dp))
+
         Image( // profile image
             painter = painterResource(imageID),
             contentDescription = null,
             modifier = Modifier
-                .size(60.dp)
+                .size(62.dp)
                 .border(
-                    BorderStroke(2.dp, MaterialTheme.colorScheme.primary),
+                    BorderStroke(1.8.dp, MaterialTheme.colorScheme.primary),
                     CircleShape
                 )
                 .padding(4.dp)
@@ -70,13 +75,12 @@ fun ChatPerson(
                 horizontalArrangement = Arrangement.SpaceBetween,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(start = 8.dp)
+                    .padding(start = 8.dp, top = 8.dp, end = 8.dp)
             ) { // name & time row
                 Text( // name
                     text = name,
                     fontWeight = FontWeight.Bold,
                     fontSize = 16.sp
-
                 )
 
                 Text( //time
@@ -87,14 +91,12 @@ fun ChatPerson(
                 )
             }
 
-            Spacer(modifier = Modifier.height(4.dp))
-
             Row(
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceBetween,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(start = 8.dp)
+                    .padding(bottom = 24.dp, start = 8.dp, end = 8.dp)
             ) { // message peek & message count
                 Text( // message peek
                     text = message,
@@ -117,6 +119,11 @@ fun ChatPerson(
                     )
                 }
             }
+
+            HorizontalDivider(
+                color = Color.Gray,
+                thickness = 0.5.dp
+            )
         }
     }
 }
@@ -125,31 +132,32 @@ fun ChatPerson(
  * "All", "Unread" and "Groups" buttons.
  */
 @Composable
-fun TopButton(btnText: String, modifier: Modifier = Modifier) {
+fun TopButton(
+    btnText: String,
+    isActive: Boolean,
+    modifier: Modifier = Modifier
+) {
     Button(
         modifier = modifier,
-        colors = ButtonDefaults.buttonColors(MaterialTheme.colorScheme.secondary),
-        onClick = { /*TODO*/ }
+        colors = if (isActive) ButtonDefaults.buttonColors(MaterialTheme.colorScheme.primary)
+            else ButtonDefaults.buttonColors(MaterialTheme.colorScheme.outlineVariant),
+        onClick = {}
     ) {
         Text(
             text = btnText,
-            color = MaterialTheme.colorScheme.onSecondary,
-            fontWeight = FontWeight.W900
+            color = if (isActive) MaterialTheme.colorScheme.onSurface
+                else MaterialTheme.colorScheme.outline,
+            fontWeight = FontWeight.Bold
         )
     }
 }
-
-/**
- * Whatsapp top app bar
- */
-
 
 /* Previews */
 @Preview(showBackground = true)
 @Composable
 fun ChatPersonPreview() {
     WhatsappUITheme {
-        ChatPerson(
+        SingleChat(
             imageID = R.drawable.pic0,
             name = "Bellamy Okogie",
             time = "8.19 AM",
@@ -163,6 +171,6 @@ fun ChatPersonPreview() {
 @Composable
 fun TopButtonPreview() {
     WhatsappUITheme {
-        TopButton(btnText = "Unread")
+        TopButton(btnText = "Unread", isActive = true)
     }
 }
